@@ -1,26 +1,46 @@
+import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:super_editor/super_editor.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 
 class EditRichTextScreen extends StatefulWidget {
   const EditRichTextScreen({super.key});
 
   @override
-  _EditRichTextScreenState createState() => _EditRichTextScreenState();
+  EditRichTextScreenState createState() => EditRichTextScreenState();
 }
 
-class _EditRichTextScreenState extends State<EditRichTextScreen> {
-  quill.QuillController? _quillController;
-  Document? _superEditorDocument;
-  String _currentEditor = "Quill";
+class EditRichTextScreenState extends State<EditRichTextScreen> {
+  final quill.QuillController _quillController = quill.QuillController.basic();
+  final HtmlEditorController _htmlController = HtmlEditorController();
+  final appflowyEditorState = EditorState.blank();
+  String _currentEditor = "HTML";
+  Widget _buildEditor() {
+    if (_currentEditor == "Quill") {
+      return quill.QuillEditor.basic(
+        controller: _quillController!,
+//        readOnly: false,
+      );
+    } else if (_currentEditor == "AppFlowy") {
+      return AppFlowyEditor(
+        editorState: appflowyEditorState,
+      );
+    } else {
+      return HtmlEditor(
+        controller: _htmlController, //required
+        htmlEditorOptions: const HtmlEditorOptions(
+          hint: "Your text here...",
+          autoAdjustHeight: true,
+          //initalText: "text content initial, if any",
+        ),
+      );
+    }
+  }
 
   @override
-  void initState() {
-    super.initState();
-    _quillController = quill.QuillController.basic();
-    _superEditorDocument = MutableDocument(nodes: [
-      ParagraphNode(id: DocumentEditor.createNodeId(), text: AttributedText()),
-    ]);
+  void dispose() {
+    _quillController.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,9 +58,8 @@ class _EditRichTextScreenState extends State<EditRichTextScreen> {
               items: const [
                 DropdownMenuItem(value: "Quill", child: Text("Quill Editor")),
                 DropdownMenuItem(
-                    value: "HTML", child: Text("HTML Enhanced (Stub)")),
-                DropdownMenuItem(
-                    value: "SuperEditor", child: Text("Super Editor")),
+                    value: "AppFlowy", child: Text("AppFlowy Editor")),
+                DropdownMenuItem(value: "HTML", child: Text("HTML Enhanced")),
               ],
               onChanged: (value) {
                 setState(() {
@@ -54,26 +73,20 @@ class _EditRichTextScreenState extends State<EditRichTextScreen> {
                     border: Border.all(width: 2.0),
                     borderRadius:
                         const BorderRadius.all(Radius.elliptical(16.0, 9.0))),
-                    padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: _buildEditor(),
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 String content = "";
 
                 if (_currentEditor == "Quill") {
-                  content = _quillController?.document.toPlainText() ?? "";
-                } else if (_currentEditor == "SuperEditor") {
-                  content = _superEditorDocument?.nodes.map((node) {
-                        if (node is ParagraphNode) {
-                          return node.text.text;
-                        }
-                        return "";
-                      }).join("\n") ??
-                      "";
+                  content = _quillController.document.root.toString();
+                } if (_currentEditor == "AppFlowy") {
+                  content = "Do something here with AppFlow";
                 } else {
-                  content = "HTML Enhanced content (stub).";
+                  content = await _htmlController.getText();
                 }
 
                 Navigator.pop(context, content);
@@ -84,28 +97,5 @@ class _EditRichTextScreenState extends State<EditRichTextScreen> {
         ),
       ),
     );
-  }
-
-  Widget _buildEditor() {
-    if (_currentEditor == "Quill") {
-      return quill.QuillEditor.basic(
-        controller: _quillController!,
-//        readOnly: false,
-      );
-    }
-/*
-    else if (_currentEditor == "SuperEditor") {
-      return SuperEditor(
-        editor: DocumentEditor(document: _superEditorDocument!),
-        documentOverlayBuilders: [],
-      );
-      
-    }
-*/
-    else {
-      return const Center(
-        child: Text("HTML Enhanced Editor is not implemented."),
-      );
-    }
   }
 }
