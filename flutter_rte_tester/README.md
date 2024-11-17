@@ -4,13 +4,14 @@ A simple project to test rich text editors available in flutter
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To start development download the the source and run the following to run the code in hot reload mode
 
-A few resources to get you started if this is your first Flutter project:
+```
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To publish project to git hub pages run the following build
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter build web --base-href "/flutter_mini_projects/deployments/web/flutter_rte_tester/"
+```
