@@ -10,9 +10,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  final List<String> _items = [];
+  final List<Map> _items = [];
 
-  void _addItem(String content) {
+  void _addItem(Map content) {
     setState(() {
       _items.add(content);
     });
@@ -29,7 +29,7 @@ class MainScreenState extends State<MainScreen> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(
-              _items[index],
+              "${_items[index]['summary']}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -38,7 +38,7 @@ class MainScreenState extends State<MainScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ViewRichTextScreen(content: _items[index]),
+                      ViewRichTextScreen(content: _items[index]['content']),
                 ),
               );
             },
@@ -54,7 +54,7 @@ class MainScreenState extends State<MainScreen> {
             ),
           );
 
-          if (result != null && result is String) {
+          if (result != null && result is Map) {
             _addItem(result);
           }
         },

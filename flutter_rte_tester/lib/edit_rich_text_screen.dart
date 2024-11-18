@@ -67,29 +67,36 @@ class EditRichTextScreenState extends State<EditRichTextScreen> {
                 });
               },
             ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(width: 2.0),
-                    borderRadius:
-                        const BorderRadius.all(Radius.elliptical(16.0, 9.0))),
-                padding: const EdgeInsets.all(5.0),
-                child: _buildEditor(),
-              ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2.0),
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(16.0, 9.0))),
+              padding: const EdgeInsets.all(5.0),
+              child: _buildEditor(),
             ),
             ElevatedButton(
               onPressed: () async {
-                String content = "";
+                var out = {"summary": "", "content": "", "editor": "HTML"};
 
                 if (_currentEditor == "Quill") {
-                  content = _quillController.document.root.toString();
-                } if (_currentEditor == "AppFlowy") {
-                  content = "Do something here with AppFlow";
+                  out['content'] = _quillController.document.root.toString();
+                  out['editor'] = "Quill";
+                  out["summary"] = _quillController.document.toPlainText();
+                }
+                if (_currentEditor == "AppFlowy") {
+                  out['content'] = "Do something here with AppFlow";
+                  out['editor'] = "AppFlowy";
+                  out["summary"] = "Not Implemented yet AppFlowy";
                 } else {
-                  content = await _htmlController.getText();
+                  out['content'] = await _htmlController.getText();
+                  out['editor'] = "HTML";
+                  out["summary"] = _htmlController.unwrapOrNull().toString();
                 }
 
-                Navigator.pop(context, content);
+                if (context.mounted) {
+                  Navigator.pop(context, out);
+                }
               },
               child: const Text('Save'),
             ),
