@@ -1,6 +1,5 @@
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:html_editor_enhanced/html_editor.dart';
 
 class EditRichTextScreen extends StatefulWidget {
@@ -11,17 +10,11 @@ class EditRichTextScreen extends StatefulWidget {
 }
 
 class EditRichTextScreenState extends State<EditRichTextScreen> {
-  final quill.QuillController _quillController = quill.QuillController.basic();
   final HtmlEditorController _htmlController = HtmlEditorController();
   final appflowyEditorState = EditorState.blank();
   String _currentEditor = "HTML";
   Widget _buildEditor() {
-    if (_currentEditor == "Quill") {
-      return quill.QuillEditor.basic(
-        controller: _quillController!,
-//        readOnly: false,
-      );
-    } else if (_currentEditor == "AppFlowy") {
+    if (_currentEditor == "AppFlowy") {
       return AppFlowyEditor(
         editorState: appflowyEditorState,
       );
@@ -39,7 +32,7 @@ class EditRichTextScreenState extends State<EditRichTextScreen> {
 
   @override
   void dispose() {
-    _quillController.dispose();
+    _htmlController.clear();
     super.dispose();
   }
 
@@ -56,34 +49,29 @@ class EditRichTextScreenState extends State<EditRichTextScreen> {
             DropdownButton<String>(
               value: _currentEditor,
               items: const [
-                DropdownMenuItem(value: "Quill", child: Text("Quill Editor")),
                 DropdownMenuItem(
                     value: "AppFlowy", child: Text("AppFlowy Editor")),
                 DropdownMenuItem(value: "HTML", child: Text("HTML Enhanced")),
               ],
               onChanged: (value) {
                 setState(() {
-                  _currentEditor = value ?? "Quill";
+                  _currentEditor = value ?? "HTML";
                 });
               },
             ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(width: 2.0),
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(16.0, 9.0))),
-              padding: const EdgeInsets.all(5.0),
-              child: _buildEditor(),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 2.0),
+                    borderRadius:
+                        const BorderRadius.all(Radius.elliptical(16.0, 9.0))),
+                padding: const EdgeInsets.all(5.0),
+                child: _buildEditor(),
+              ),
             ),
             ElevatedButton(
               onPressed: () async {
                 var out = {"summary": "", "content": "", "editor": "HTML"};
-
-                if (_currentEditor == "Quill") {
-                  out['content'] = _quillController.document.root.toString();
-                  out['editor'] = "Quill";
-                  out["summary"] = _quillController.document.toPlainText();
-                }
                 if (_currentEditor == "AppFlowy") {
                   out['content'] = "Do something here with AppFlow";
                   out['editor'] = "AppFlowy";
