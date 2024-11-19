@@ -12,7 +12,7 @@ class EditRichTextScreen extends StatefulWidget {
 class EditRichTextScreenState extends State<EditRichTextScreen> {
   final HtmlEditorController _htmlController = HtmlEditorController();
   final appflowyEditorState = EditorState.blank();
-  String _currentEditor = "HTML";
+  String _currentEditor = "SummerNote";
   Widget _buildEditor() {
     if (_currentEditor == "AppFlowy") {
       return AppFlowyEditor(
@@ -51,11 +51,11 @@ class EditRichTextScreenState extends State<EditRichTextScreen> {
               items: const [
                 DropdownMenuItem(
                     value: "AppFlowy", child: Text("AppFlowy Editor")),
-                DropdownMenuItem(value: "HTML", child: Text("HTML Enhanced")),
+                DropdownMenuItem(value: "SummerNote", child: Text("SummerNote")),
               ],
               onChanged: (value) {
                 setState(() {
-                  _currentEditor = value ?? "HTML";
+                  _currentEditor = value ?? "SummerNote";
                 });
               },
             ),
@@ -71,15 +71,28 @@ class EditRichTextScreenState extends State<EditRichTextScreen> {
             ),
             ElevatedButton(
               onPressed: () async {
-                var out = {"summary": "", "content": "", "editor": "HTML"};
+                var out = {"summary": "", "content": "", "editor": "SummerNote"};
                 if (_currentEditor == "AppFlowy") {
-                  out['content'] = "Do something here with AppFlow";
+                  final document = appflowyEditorState.document;
+                  final encoder = DocumentHTMLEncoder(encodeParsers: const [
+                    HTMLBulletedListNodeParser(),
+                    HTMLHeadingNodeParser(),
+                    HTMLImageNodeParser(),
+                    HTMLNumberedListNodeParser(),
+                    HTMLQuoteNodeParser(),
+                    HTMLTextNodeParser(),
+                    HTMLTodoListNodeParser(),
+                    HtmlTableNodeParser(),
+                  ]);
+                  final htmlContent = encoder.convert(document);
+                  final summary = document.root.children.length;
+                  out['content'] = htmlContent;
                   out['editor'] = "AppFlowy";
-                  out["summary"] = "Not Implemented yet AppFlowy";
+                  out["summary"] = "AppFlow text with $summary nodes";
                 } else {
                   out['content'] = await _htmlController.getText();
-                  out['editor'] = "HTML";
-                  out["summary"] = _htmlController.unwrapOrNull().toString();
+                  out['editor'] = "SummerNote";
+                  out["summary"] = "SummerNote Text with ${_htmlController.characterCount} characters";
                 }
 
                 if (context.mounted) {
