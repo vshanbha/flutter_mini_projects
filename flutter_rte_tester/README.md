@@ -25,3 +25,5 @@ rm -r ../deployments/web/flutter_rte_tester/
 mv build/web ../deployments/web/flutter_rte_tester
 ```
 
+3. Commit Changes to main branch. GitHub pages automatically deploys code from the main branch
+
