@@ -21,12 +21,10 @@ class ViewRichTextScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Expanded(
-          child: InAppWebView(
-            initialSettings: settings,
-            key: webViewKey,
-            initialData: InAppWebViewInitialData(data: content),
-          ),
+        child: InAppWebView(
+          initialSettings: settings,
+          key: webViewKey,
+          initialData: InAppWebViewInitialData(data: content),
         ),
       ),
     );
