@@ -1,6 +1,7 @@
-# flutter_rte_tester
+# adaptive_scaffold_demo
 
-A simple project to test rich text editors available in flutter
+A Project to demonstrate and test the Adaptive Scaffold classes
+Example code copied and customized from [flutter_adaptive_scaffold](https://pub.dev/packages/flutter_adaptive_scaffold/example)
 
 ## Getting Started
 
@@ -13,20 +14,20 @@ To start development download the the source and run the following to run the co
 ```
 flutter run
 ```
-### Deployment Steps - Web
+### Deployment - Web
 To publish project to GitHub pages run the following steps
 
 1. Build Project for web with appropriate base-href attribute
 
 ```
-flutter build web --base-href "/flutter_mini_projects/deployments/web/flutter_rte_tester/"
+flutter build web --base-href "/flutter_mini_projects/deployments/web/adaptive_scaffold_demo/"
 ```
 
 2. Overwrite deployed folder with the built output. Relevant commands for Linux and Mac are below.
 
 ```
-rm -r ../deployments/web/flutter_rte_tester/
-mv build/web ../deployments/web/flutter_rte_tester
+rm -r ../deployments/web/adaptive_scaffold_demo/
+mv build/web ../deployments/web/adaptive_scaffold_demo
 ```
 
 3. Commit Changes to main branch. GitHub pages automatically deploys code from the main branch

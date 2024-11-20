@@ -10,11 +10,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  final List<Map> _items = [];
+  final List<Map> Items = [];
 
   void _addItem(Map content) {
     setState(() {
-      _items.add(content);
+      Items.add(content);
     });
   }
 
@@ -25,11 +25,11 @@ class MainScreenState extends State<MainScreen> {
         title: const Text('Rich Text Editor Demo'),
       ),
       body: ListView.builder(
-        itemCount: _items.length,
+        itemCount: Items.length,
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(
-              "${_items[index]['summary']}",
+              "${Items[index]['summary']}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -38,7 +38,7 @@ class MainScreenState extends State<MainScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ViewRichTextScreen(content: _items[index]['content']),
+                      ViewRichTextScreen(content: Items[index]['content']),
                 ),
               );
             },
