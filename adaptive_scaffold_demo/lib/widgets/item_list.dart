@@ -19,30 +19,16 @@ class ItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-      floatingActionButton: Breakpoints.mediumAndUp.isActive(context)
-          ? null
-          : const SmallComposeIcon(),
-      body: Column(
-        children: <Widget>[
-          Padding(
+      appBar: AppBar(
+        title: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                prefixIcon: const Padding(
+                suffixIcon: const Padding(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Icon(Icons.search),
-                ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: CircleAvatar(
                     radius: 18,
-                    child: Image.asset(
-                      'images/plum.png',
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Icon(Icons.search),
                   ),
                 ),
                 border: OutlineInputBorder(
@@ -58,6 +44,13 @@ class ItemList extends StatelessWidget {
               ),
             ),
           ),
+      ),
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+      floatingActionButton: Breakpoints.mediumAndUp.isActive(context)
+          ? null
+          : const SmallComposeIcon(),
+      body: Column(
+        children: <Widget>[
           Expanded(
             child: ListView.builder(
               itemCount: items.length,
