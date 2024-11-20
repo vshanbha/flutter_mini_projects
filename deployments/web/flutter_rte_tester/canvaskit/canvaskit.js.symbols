@@ -719,7 +719,7 @@
 718:pad
 719:icu_74::UnicodeString::UnicodeString\28char16_t\20const*\29
 720:icu_74::UnicodeSet::add\28int\29
-721:hb_lockable_set_t<hb_user_data_array_t::hb_user_data_item_t\2c\20hb_mutex_t>::fini\28hb_mutex_t&\29
+721:hb_lockable_set_t<hb_user_data_array_t::hb_user_dataItem_t\2c\20hb_mutex_t>::fini\28hb_mutex_t&\29
 722:ft_mem_alloc
 723:emscripten::internal::FunctionInvoker<void\20\28*\29\28SkCanvas&\2c\20unsigned\20long\2c\20SkBlendMode\29\2c\20void\2c\20SkCanvas&\2c\20unsigned\20long\2c\20SkBlendMode>::invoke\28void\20\28**\29\28SkCanvas&\2c\20unsigned\20long\2c\20SkBlendMode\29\2c\20SkCanvas*\2c\20unsigned\20long\2c\20SkBlendMode\29
 724:__ashlti3
@@ -3013,8 +3013,8 @@
 3012:getDefaultScript\28icu_74::CharString\20const&\2c\20icu_74::CharString\20const&\29
 3013:generate_distance_field_from_image\28unsigned\20char*\2c\20unsigned\20char\20const*\2c\20int\2c\20int\29
 3014:ft_var_readpackeddeltas
-3015:ft_var_get_item_delta
-3016:ft_var_done_item_variation_store
+3015:ft_var_getItem_delta
+3016:ft_var_doneItem_variation_store
 3017:ft_glyphslot_done
 3018:ft_glyphslot_alloc_bitmap
 3019:freelocale
@@ -4419,7 +4419,7 @@
 4418:hb_lazy_loader_t<AAT::mort\2c\20hb_table_lazy_loader_t<AAT::mort\2c\2029u\2c\20false>\2c\20hb_face_t\2c\2029u\2c\20hb_blob_t>::get\28\29\20const
 4419:hb_language_matches
 4420:hb_indic_get_categories\28unsigned\20int\29
-4421:hb_hashmap_t<hb_serialize_context_t::object_t\20const*\2c\20unsigned\20int\2c\20false>::fetch_item\28hb_serialize_context_t::object_t\20const*\20const&\2c\20unsigned\20int\29\20const
+4421:hb_hashmap_t<hb_serialize_context_t::object_t\20const*\2c\20unsigned\20int\2c\20false>::fetchItem\28hb_serialize_context_t::object_t\20const*\20const&\2c\20unsigned\20int\29\20const
 4422:hb_hashmap_t<hb_serialize_context_t::object_t\20const*\2c\20unsigned\20int\2c\20false>::alloc\28unsigned\20int\29
 4423:hb_font_t::get_glyph_v_origin_with_fallback\28unsigned\20int\2c\20int*\2c\20int*\29
 4424:hb_font_set_variations
@@ -4473,7 +4473,7 @@
 4472:gather_uniforms_and_check_for_main\28SkSL::Program\20const&\2c\20std::__2::vector<SkRuntimeEffect::Uniform\2c\20std::__2::allocator<SkRuntimeEffect::Uniform>>*\2c\20std::__2::vector<SkRuntimeEffect::Child\2c\20std::__2::allocator<SkRuntimeEffect::Child>>*\2c\20SkRuntimeEffect::Uniform::Flags\2c\20unsigned\20long*\29
 4473:fwrite
 4474:ft_var_to_normalized
-4475:ft_var_load_item_variation_store
+4475:ft_var_loadItem_variation_store
 4476:ft_var_load_hvvar
 4477:ft_var_load_avar
 4478:ft_var_get_value_pointer

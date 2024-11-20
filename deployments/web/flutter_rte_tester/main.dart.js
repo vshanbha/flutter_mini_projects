@@ -104070,10 +104070,10 @@ gu(a){return B.e.gu(this.a)},
 j(a,b){if(b==null)return!1
 return J.d(b,this.a)},
 k(a){var s=this.a
-switch(s){case 0:return"MENU_ITEM_NONE"
-case 4:return"MENU_ITEM_PROCESS_TEXT"
-case 1:return"MENU_ITEM_SHARE"
-case 2:return"MENU_ITEM_WEB_SEARCH"}return B.e.k(s)}}
+switch(s){case 0:return"MENUItem_NONE"
+case 4:return"MENUItem_PROCESS_TEXT"
+case 1:return"MENUItem_SHARE"
+case 2:return"MENUItem_WEB_SEARCH"}return B.e.k(s)}}
 A.adz.prototype={
 $1(a){return a.b===this.a},
 $S:621}
