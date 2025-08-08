@@ -2,8 +2,9 @@ import 'package:adaptive_scaffold_demo/model/card_selected_callback.dart';
 import 'package:adaptive_scaffold_demo/model/item.dart';
 import 'package:adaptive_scaffold_demo/widgets/item_list_tile.dart';
 import 'package:adaptive_scaffold_demo/widgets/small_compose_icon.dart';
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+
 
 class ItemList extends StatelessWidget {
   const ItemList({super.key, 

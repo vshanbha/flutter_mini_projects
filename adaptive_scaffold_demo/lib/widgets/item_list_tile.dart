@@ -3,8 +3,8 @@ import 'package:adaptive_scaffold_demo/model/email.dart';
 import 'package:adaptive_scaffold_demo/model/item.dart';
 import 'package:adaptive_scaffold_demo/model/screen_arguments.dart';
 import 'package:adaptive_scaffold_demo/widgets/extract_route_arguments.dart';
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class ItemListTile extends StatelessWidget {
   const ItemListTile({super.key, 

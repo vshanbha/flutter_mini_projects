@@ -2,8 +2,8 @@ import 'package:adaptive_scaffold_demo/model/item.dart';
 import 'package:adaptive_scaffold_demo/pages/example_page.dart';
 import 'package:adaptive_scaffold_demo/widgets/detail_tile.dart';
 import 'package:adaptive_scaffold_demo/widgets/item_list.dart';
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 @deprecated
 class HomeAdaptive extends StatefulWidget {
