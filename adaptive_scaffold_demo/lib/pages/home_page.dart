@@ -33,7 +33,10 @@ class _HomePageState extends State<HomePage>
   void selectCard(int? index) {
     setState(() {
       selected = index;
-
+      // The behavior of opening a detail view is different on small screens
+      // than large screens.
+      // Small screens open a view with the detail view while large screens
+      // simply show the details on the secondaryBody.
       if (!Breakpoints.mediumAndUp.isActive(context)) {
         var selectedItem = selected != null ? allItems[selected!] : null;
         if (selectedItem == null) {
@@ -49,7 +52,7 @@ class _HomePageState extends State<HomePage>
           ),
         );
       }
-      
+
     });
   }
 
