@@ -1,7 +1,7 @@
 # adaptive_scaffold_demo
 
 A Project to demonstrate and test the Adaptive Scaffold classes
-Example code copied and customized from [flutter_adaptive_scaffold](https://pub.dev/packages/flutter_adaptive_scaffold/example)
+Example code copied and customized from [flutter_adaptive_scaffold](https://pub.dev/packages/flutter_adaptive_scaffold/example) and [custom_adaptive_scaffold](https://pub.dev/packages/custom_adaptive_scaffold/example)
 
 ## Getting Started
 

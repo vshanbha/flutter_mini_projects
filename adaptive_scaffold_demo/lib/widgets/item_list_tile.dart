@@ -23,17 +23,7 @@ class ItemListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // The behavior of opening a detail view is different on small screens
-        // than large screens.
-        // Small screens open a modal with the detail view while large screens
-        // simply show the details on the secondaryBody.
         selectCard(allItems.indexOf(item));
-        if (!Breakpoints.mediumAndUp.isActive(context)) {
-          Navigator.of(context).pushNamed(ExtractRouteArguments.routeName,
-              arguments: ScreenArguments(item: item, selectCard: selectCard));
-        } else {
-          selectCard(allItems.indexOf(item));
-        }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
