@@ -1,5 +1,5 @@
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class LargeComposeIcon extends StatelessWidget {
   const LargeComposeIcon({super.key});

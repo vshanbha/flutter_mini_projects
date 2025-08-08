@@ -1,3 +1,5 @@
+import 'package:adaptive_scaffold_demo/widgets/route_detail_view.dart';
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_scaffold_demo/model/item.dart';
 import 'package:adaptive_scaffold_demo/pages/example_page.dart';
@@ -5,7 +7,6 @@ import 'package:adaptive_scaffold_demo/widgets/detail_tile.dart';
 import 'package:adaptive_scaffold_demo/widgets/item_list.dart';
 import 'package:adaptive_scaffold_demo/widgets/large_compose_icon.dart';
 import 'package:adaptive_scaffold_demo/widgets/medium_compose_icon.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   /// Creates a const [MyHomePage].
@@ -14,7 +15,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 
 class _HomePageState extends State<HomePage>
     with TickerProviderStateMixin, ChangeNotifier {
@@ -28,13 +28,31 @@ class _HomePageState extends State<HomePage>
   // The index of the selected mail card.
   int? selected;
 
+  // The index of the navigation screen. Only impacts body/secondaryBody
+
   void selectCard(int? index) {
     setState(() {
       selected = index;
+
+      if (!Breakpoints.mediumAndUp.isActive(context)) {
+        var selectedItem = selected != null ? allItems[selected!] : null;
+        if (selectedItem == null) {
+          return;
+        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RouteDetailView(
+              item: selectedItem,
+              selectCard: selectCard,
+            ),
+          ),
+        );
+      }
+      
     });
   }
 
-  // The index of the navigation screen. Only impacts body/secondaryBody
   int _navigationIndex = 0;
 
   // The controllers used for the staggered animation of the navigation elements.
@@ -185,20 +203,20 @@ class _HomePageState extends State<HomePage>
 
     // These are the destinations used within the AdaptiveScaffold navigation
     // builders.
-    const List<NavigationDestination> destinations = <NavigationDestination>[
-      NavigationDestination(
+    const List<CustomNavigationDestination> destinations = <CustomNavigationDestination>[
+      CustomNavigationDestination(
         label: 'Inbox',
         icon: Icon(Icons.inbox),
       ),
-      NavigationDestination(
+      CustomNavigationDestination(
         label: 'Articles',
         icon: Icon(Icons.article_outlined),
       ),
-      NavigationDestination(
+      CustomNavigationDestination(
         label: 'Chat',
         icon: Icon(Icons.chat_bubble_outline),
       ),
-      NavigationDestination(
+      CustomNavigationDestination(
         label: 'Video',
         icon: Icon(Icons.video_call_outlined),
       )
@@ -284,7 +302,7 @@ class _HomePageState extends State<HomePage>
                   trailing: trailingNavRail,
                   extended: true,
                   destinations:
-                      destinations.map((NavigationDestination destination) {
+                      destinations.map((CustomNavigationDestination destination) { // Changed to CustomNavigationDestination
                     return AdaptiveScaffold.toRailDestination(destination);
                   }).toList(),
                 ),
@@ -304,7 +322,7 @@ class _HomePageState extends State<HomePage>
                   trailing: trailingNavRail,
                   extended: true,
                   destinations:
-                      destinations.map((NavigationDestination destination) {
+                      destinations.map((CustomNavigationDestination destination) { // Changed to CustomNavigationDestination
                     return AdaptiveScaffold.toRailDestination(destination);
                   }).toList(),
                 ),
@@ -324,7 +342,7 @@ class _HomePageState extends State<HomePage>
                   trailing: trailingNavRail,
                   extended: true,
                   destinations:
-                      destinations.map((NavigationDestination destination) {
+                      destinations.map((CustomNavigationDestination destination) { // Changed to CustomNavigationDestination
                     return AdaptiveScaffold.toRailDestination(destination);
                   }).toList(),
                 ),
@@ -375,6 +393,12 @@ class _HomePageState extends State<HomePage>
                 outAnimation: AdaptiveScaffold.topToBottom,
                 builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
                   destinations: destinations,
+                  currentIndex: _navigationIndex,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      _navigationIndex = index;
+                    });
+                  },
                 ),
               )
             },
